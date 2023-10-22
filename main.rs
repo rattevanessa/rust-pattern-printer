@@ -2,6 +2,8 @@ trait Pattern {
     fn draw(&self, c: char);
 }
 
+struct TrianglePattern(i32);
+
 struct BoxPattern {
     width: i32,
     height: i32,
@@ -50,9 +52,22 @@ impl Pattern for BorderBoxPattern {
     }
 }
 
+impl Pattern for TrianglePattern {
+    fn draw(&self, c: char) {
+        for i in 1..self.0 + 1 {
+            for _ in 0..i {
+                print!("{}", c)
+            }
+            println!()
+        }
+    }
+}
+
 fn main() {
     let bp = BoxPattern::new(32, 4);
     bp.draw('#');
     let bbp = BorderBoxPattern::new(32, 4);
-    bbp.draw('#')
+    bbp.draw('#');
+    let tp = TrianglePattern(10);
+    tp.draw('#');
 }
