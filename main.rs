@@ -2,6 +2,8 @@ trait Pattern {
     fn draw(&self, c: char);
 }
 
+struct ReverseTrianglePattern(i32);
+
 struct TrianglePattern(i32);
 
 struct BoxPattern {
@@ -63,6 +65,20 @@ impl Pattern for TrianglePattern {
     }
 }
 
+impl Pattern for ReverseTrianglePattern {
+    fn draw(&self, c: char) {
+        for i in 1..self.0 + 1 {
+            for _ in 0..i {
+                print!(" ");
+            }
+            for _ in i..self.0 {
+                print!("{}", c)
+            }
+            println!()
+        }
+    }
+}
+
 fn main() {
     let bp = BoxPattern::new(32, 4);
     bp.draw('#');
@@ -70,4 +86,6 @@ fn main() {
     bbp.draw('#');
     let tp = TrianglePattern(10);
     tp.draw('#');
+    let rtp = ReverseTrianglePattern(10);
+    rtp.draw('#');
 }
